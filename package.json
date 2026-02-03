@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "dependencies": {
+    "aws-sdk": "^2.1693.0",
+    "chart.js": "^4.5.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "module": "^2.0.0",
+    "react-chartjs-2": "^5.3.1"
+  }
+}
