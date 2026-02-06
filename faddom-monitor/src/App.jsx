@@ -7,6 +7,7 @@ import { INTERVAL_OPTIONS } from "./constants.jsx";
 import Button from "./components/Button/Button.jsx";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
+import LineChart from "./components/LineChart/LineChart.jsx";
 
 function App() {
   const [startDate, setStartDate] = useState("");
@@ -68,30 +69,8 @@ function App() {
       <div className="charts-container">
         <div className="chart-item">
           <h2>CPU Utilization</h2>
-          <Line
-            data={{
-              labels: chartData
-                ? chartData.map((d) =>
-                    new Date(d.Timestamp).toLocaleTimeString(),
-                  )
-                : dummyData.map((d) =>
-                    new Date(d.Timestamp).toLocaleTimeString(),
-                  ),
-              datasets: [
-                {
-                  label: "CPU Utilization (%)",
-                  data: chartData
-                    ? chartData.map((d) => d.Average)
-                    : dummyData.map((d) => d.Average),
-                  fill: false,
-                  backgroundColor: "rgba(75,192,192,0.4)",
-                  borderColor: "rgba(75,192,192,1)",
-                  tension: 0.1,
-                },
-              ],
-            }}
-          />
         </div>
+        <LineChart chartData={chartData} />
       </div>
     </>
   );
