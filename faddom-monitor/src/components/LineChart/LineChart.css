@@ -1,0 +1,9 @@
+.line-chart-container {
+  width: 80%;
+  max-width: 900px;
+  height: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--soft-white);
+  border-radius: 4px;
+}

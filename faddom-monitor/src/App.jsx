@@ -9,7 +9,7 @@ import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import LineChart from "./components/LineChart/LineChart.jsx";
 
-function App() {
+export default function App() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [ipAddress, setIpAddress] = useState("");
@@ -67,29 +67,9 @@ function App() {
         <Button text="Submit" onClick={() => handleOnSubmit()} />
       </div>
       <div className="charts-container">
-        <div className="chart-item">
-          <h2>CPU Utilization</h2>
-        </div>
+        <Header text="CPU Status" />
         <LineChart chartData={chartData} />
       </div>
     </>
   );
 }
-
-export default App;
-/*
-            "Timestamp": "2026-01-01T10:50:00.000Z",
-            "Average": 0.789857565463171,
-            "Unit": "Percent"
-        },
-        {
-            "Timestamp": "2026-01-01T10:55:00.000Z",
-            "Average": 0.7616652507284638,
-            "Unit": "Percent"
-        },
-        {
-            "Timestamp": "2026-01-01T11:00:00.000Z",
-            "Average": 0.788338498590089,
-            "Unit": "Percent"
-        },
-        */
