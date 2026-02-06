@@ -15,7 +15,7 @@ export async function fetchCPUDataFromCloudWatch(
     const ec2 = new AWS.EC2();
     const instance = await ec2
       .describeInstances({
-        Filters: [{ Name: "ip-address", Values: [ipAddress] }],
+        Filters: [{ Name: "private-ip-address", Values: [ipAddress] }],
       })
       .promise();
     if (
