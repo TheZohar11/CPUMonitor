@@ -1,5 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import Header from "./components/Header/Header.jsx";
 import Input from "./components/Input/Input.jsx";
 import DropDown from "./components/DropDown/DropDown.jsx";
@@ -8,6 +10,8 @@ import Button from "./components/Button/Button.jsx";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import LineChart from "./components/LineChart/LineChart.jsx";
+
+dayjs.extend(utc);
 
 export default function App() {
   const [startDate, setStartDate] = useState("");
@@ -19,8 +23,8 @@ export default function App() {
   async function handleOnSubmit() {
     const requestData = {
       ipAddress,
-      startDate,
-      endDate,
+      startDate: dayjs(startDate).utc().format(),
+      endDate: dayjs(endDate).utc().format(),
       interval,
     };
     const response = await fetch("http://localhost:3000/cpu-data", {
