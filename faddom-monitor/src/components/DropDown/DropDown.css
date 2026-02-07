@@ -1,1 +1,6 @@
-/* DropDown component styles */
+.drop-down {
+  margin-top: 35px;
+  padding: 10px;
+  border: 2px solid var(--soft-light-gray);
+  border-radius: 4px;
+}
