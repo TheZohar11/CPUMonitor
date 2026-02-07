@@ -25,7 +25,12 @@ export default function LineChart({ chartData }) {
       <Line
         data={{
           labels: chartData
-            ? chartData.map((d) => new Date(d.Timestamp).toLocaleTimeString())
+            ? chartData.map((d) =>
+                new Date(d.Timestamp).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }),
+              )
             : [],
           datasets: [
             {

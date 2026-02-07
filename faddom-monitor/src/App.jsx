@@ -41,14 +41,14 @@ export default function App() {
         <Input
           text="start date"
           placeholder="Enter value"
-          type="date"
+          type="datetime-local"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
         />
         <Input
           text="end date"
           placeholder="Enter value"
-          type="date"
+          type="datetime-local"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
         />
