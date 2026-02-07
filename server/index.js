@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import dayjs from "dayjs";
 import { fetchCPUDataFromCloudWatch } from "./fetchCPUDataFromCloudWatch.js";
 
 dotenv.config();
@@ -11,6 +12,12 @@ app.use(cors());
 
 app.post("/cpu-data", async (req, res) => {
   const { ipAddress, startDate, endDate, interval } = req.body;
+
+  const daysBetween = dayjs(endDate).diff(dayjs(startDate), "day");
+  if (daysBetween > 7) {
+    return res.status(400).json({ error: "Maximum time range is 7 days" });
+  }
+
   const data = await fetchCPUDataFromCloudWatch(
     ipAddress,
     startDate,
