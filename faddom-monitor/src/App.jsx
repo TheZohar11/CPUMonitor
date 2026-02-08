@@ -11,6 +11,7 @@ import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import LineChart from "./components/LineChart/LineChart.jsx";
 import Error from "./components/Error/Error.jsx";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner.jsx";
 
 dayjs.extend(utc);
 
@@ -21,9 +22,11 @@ export default function App() {
   const [interval, setInterval] = useState(INTERVAL_OPTIONS[0].value);
   const [chartData, setChartData] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleOnSubmit() {
     setError("");
+    setLoading(true);
     const requestData = {
       ipAddress,
       startDate: dayjs(startDate).utc().format(),
@@ -40,9 +43,11 @@ export default function App() {
     const data = await response.json();
     if (!response.ok) {
       setError(data.error);
+      setLoading(false);
       return;
     }
     setChartData(data.data);
+    setLoading(false);
   }
 
   return (
@@ -80,7 +85,7 @@ export default function App() {
       <div className="charts-container">
         <Header text="CPU Status" />
         {error && <Error message={error} />}
-        <LineChart chartData={chartData} />
+        {loading ? <LoadingSpinner /> : <LineChart chartData={chartData} />}
       </div>
     </>
   );
