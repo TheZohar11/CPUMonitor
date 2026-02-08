@@ -10,6 +10,7 @@ import Button from "./components/Button/Button.jsx";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import LineChart from "./components/LineChart/LineChart.jsx";
+import Error from "./components/Error/Error.jsx";
 
 dayjs.extend(utc);
 
@@ -19,8 +20,10 @@ export default function App() {
   const [ipAddress, setIpAddress] = useState("");
   const [interval, setInterval] = useState(INTERVAL_OPTIONS[0].value);
   const [chartData, setChartData] = useState(null);
+  const [error, setError] = useState("");
 
   async function handleOnSubmit() {
+    setError("");
     const requestData = {
       ipAddress,
       startDate: dayjs(startDate).utc().format(),
@@ -35,6 +38,10 @@ export default function App() {
       body: JSON.stringify(requestData),
     });
     const data = await response.json();
+    if (!response.ok) {
+      setError(data.error);
+      return;
+    }
     setChartData(data.data);
   }
 
@@ -72,6 +79,7 @@ export default function App() {
       </div>
       <div className="charts-container">
         <Header text="CPU Status" />
+        {error && <Error message={error} />}
         <LineChart chartData={chartData} />
       </div>
     </>
